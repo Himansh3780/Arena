@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Daily Ludo | Play & Earn</title>
+    <title>TechCrush Gaming | Play & Earn</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/8074/8074800.png" type="image/png">
     <script>
         tailwind.config = {
             theme: {
@@ -26,46 +27,17 @@
         /* Seat Full Style */
         .seat-full-btn { background-color: #334155 !important; color: #94a3b8 !important; cursor: not-allowed !important; pointer-events: none; }
 
-        /* Floating WhatsApp (Right Side) */
+        /* Floating WhatsApp */
         .float-wa { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999; z-index: 100; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
         .float-wa:hover { transform: scale(1.1); box-shadow: 0 0 15px #25d366; }
 
-        /* Live Notification Popup (Left Side) */
-        #notification-container {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 99;
-            display: flex;
-            flex-col: column;
-            gap: 10px;
-            pointer-events: none; /* Let clicks pass through */
-        }
-
-        .live-toast {
-            background: rgba(15, 23, 42, 0.95);
-            border-left: 4px solid #4ade80; /* Green line */
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            min-width: 250px;
-            transform: translateX(-150%); /* Start hidden left */
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .live-toast.show {
-            transform: translateX(0); /* Slide in */
-        }
-        
+        /* Notification Popup */
+        #notification-container { position: fixed; bottom: 20px; left: 20px; z-index: 99; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+        .live-toast { background: rgba(15, 23, 42, 0.95); border-left: 4px solid #4ade80; color: white; padding: 12px 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-family: 'Inter', sans-serif; font-size: 13px; min-width: 250px; transform: translateX(-150%); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 10px; }
+        .live-toast.show { transform: translateX(0); }
         .toast-icon { font-size: 18px; }
 
-        /* --- FOOTER & MODAL STYLES --- */
+        /* --- FOOTER & MODAL --- */
         .site-footer { background-color: rgba(5, 11, 20, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; padding: 50px 0 20px; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; margin-top: 60px; }
         .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         .footer-col { flex: 1; min-width: 220px; margin-bottom: 25px; }
@@ -91,9 +63,9 @@
 <body class="min-h-screen font-body flex flex-col items-center justify-center pt-8 pb-4">
 
     <div class="text-center mb-8 px-4">
-        <h1 class="text-5xl font-bold font-heading mb-2 uppercase tracking-tight">Daily <span class="text-indigo-500 neon-text">Knockout</span></h1>
-        <p class="text-gray-400">Next match starts in:</p>
-        <div id="global-timer" class="text-2xl font-bold text-yellow-400 mt-1">Checking...</div>
+        <h1 class="text-5xl font-bold font-heading mb-2 uppercase tracking-tight">TechCrush <span class="text-indigo-500 neon-text">Gaming</span></h1>
+        <p class="text-gray-400">Official Tournament Platform</p>
+        <div id="global-timer" class="text-2xl font-bold text-yellow-400 mt-2">Checking Time...</div>
     </div>
 
     <div class="w-full max-w-6xl mb-10 px-4">
@@ -101,17 +73,17 @@
             <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5">
                 <div class="text-3xl mb-2">🎟️</div>
                 <h3 class="font-bold text-indigo-400">1. Join Contest</h3>
-                <p class="text-xs text-gray-400">Select your pot (Silver, Gold, or Diamond) and pay entry fee.</p>
+                <p class="text-xs text-gray-400">Select your Match Pot and pay entry fee.</p>
             </div>
             <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5">
                 <div class="text-3xl mb-2">📲</div>
                 <h3 class="font-bold text-indigo-400">2. Get Room ID</h3>
-                <p class="text-xs text-gray-400">We add you to a WhatsApp group where Room ID is shared.</p>
+                <p class="text-xs text-gray-400">You will be added to the TechCrush WhatsApp Group.</p>
             </div>
             <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5">
                 <div class="text-3xl mb-2">🏆</div>
                 <h3 class="font-bold text-indigo-400">3. Play & Win</h3>
-                <p class="text-xs text-gray-400">Defeat opponents. Winnings transferred within 1 hour.</p>
+                <p class="text-xs text-gray-400">Win the match & get paid within 1 hour.</p>
             </div>
         </div>
     </div>
@@ -159,12 +131,12 @@
 
     <div class="w-full max-w-4xl mt-12 mb-8 px-4">
         <div class="bg-black/20 p-6 rounded-xl border border-white/5">
-            <h3 class="text-xl font-bold text-center mb-4 text-indigo-300">🛡️ Our Fair Play Promise</h3>
+            <h3 class="text-xl font-bold text-center mb-4 text-indigo-300">🛡️ Fair Play Promise</h3>
             <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
                 <div class="flex items-center gap-2">✅ <span>Room ID shared to everyone simultaneously</span></div>
-                <div class="flex items-center gap-2">✅ <span>100% Real Players (No Bots Allowed)</span></div>
-                <div class="flex items-center gap-2">✅ <span>Secure Payments via Razorpay/UPI</span></div>
-                <div class="flex items-center gap-2">✅ <span>Instant Support for Dispute Resolution</span></div>
+                <div class="flex items-center gap-2">✅ <span>100% Real Players (No Bots)</span></div>
+                <div class="flex items-center gap-2">✅ <span>Secure Payments via TechCrush</span></div>
+                <div class="flex items-center gap-2">✅ <span>Instant Support for Disputes</span></div>
             </div>
         </div>
         <div class="flex justify-center gap-4 mt-6 opacity-70">
@@ -184,12 +156,12 @@
     <footer class="site-footer w-full">
         <div class="footer-container">
             <div class="footer-col">
-                <div class="footer-heading">Dropify India</div>
-                <p>The ultimate destination for competitive gaming. Join securely, play fairly, and win instantly.</p>
+                <div class="footer-heading">TechCrush India</div>
+                <p>The #1 destination for competitive gaming. Join securely, play fairly, and win instantly.</p>
                 <p class="warning-text">⚠️ 18+ Only | One User = One Account</p>
             </div>
             <div class="footer-col">
-                <div class="footer-heading">Legal & Policies</div>
+                <div class="footer-heading">Policies</div>
                 <div class="footer-links">
                     <a onclick="openModal('terms')">Terms & Conditions</a>
                     <a onclick="openModal('refund')">Refund & Cancellation</a>
@@ -198,27 +170,26 @@
                 </div>
             </div>
             <div class="footer-col">
-                <div class="footer-heading">Contact Support</div>
+                <div class="footer-heading">Support</div>
                 <p><strong>WhatsApp:</strong> 9294931405</p>
-                <p><strong>Email:</strong> dropifyindia987@gmail.com</p>
+                <p><strong>Email:</strong> support@techcrush.in</p>
                 <p><strong>Hours:</strong> 10:00 AM – 8:00 PM (IST)</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>We do not sell or share your personal data. Payment info is processed securely via third parties.</p>
-            <p>&copy; 2026 Dropify India. All Rights Reserved.</p>
+            <p>&copy; 2026 TechCrush.in. All Rights Reserved.</p>
         </div>
     </footer>
 
     <div id="infoModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle">Policy Title</h2>
+                <h2 id="modalTitle">Policy</h2>
                 <span class="close-btn" onclick="closeModal()">&times;</span>
             </div>
             <div class="modal-body" id="modalBody"></div>
             <div class="modal-footer">
-                <button class="accept-btn" onclick="closeModal()">I Understand & Close</button>
+                <button class="accept-btn" onclick="closeModal()">Close</button>
             </div>
         </div>
     </div>
@@ -290,51 +261,33 @@
         // ---------------------------------------------
         // LIVE NOTIFICATION LOGIC (POPUPS)
         // ---------------------------------------------
-        const fakeNames = ["Rahul_K", "Amit99", "Priya_Cool", "Vicky_Don", "Sneha_M", "Rohan_Gamer", "Killer_007", "Ludo_King", "Anjali_S", "Vikram_Boss", "Arjun_P", "Neha_Cute", "Rockstar_Adi", "Simran_K", "Bad_Boy_99", "Sunny_D", "Karan_J", "Pooja_Q"];
+        const fakeNames = ["Rahul_K", "Amit99", "Priya_Cool", "Vicky_Don", "Sneha_M", "Rohan_Gamer", "Killer_007", "Ludo_King", "Anjali_S", "Vikram_Boss", "Arjun_P"];
         const fakeActions = [
             { text: "won ₹300 in Silver Pot", icon: "🔥" },
             { text: "joined Gold Pot", icon: "🚀" },
             { text: "withdrew ₹1500", icon: "💸" },
-            { text: "won ₹600 in Gold Pot", icon: "🏆" },
-            { text: "joined Diamond Pot", icon: "🎮" },
-            { text: "won ₹1500 in Diamond Pot", icon: "👑" },
-            { text: "withdrew ₹500 via UPI", icon: "💰" }
+            { text: "won ₹600 in Gold Pot", icon: "🏆" }
         ];
 
         function showNotification() {
-            // Pick Random Name & Action
             const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
             const action = fakeActions[Math.floor(Math.random() * fakeActions.length)];
-            
-            // Create Element
             const div = document.createElement("div");
             div.className = "live-toast";
             div.innerHTML = `<span class="toast-icon">${action.icon}</span> <span><strong>${name}</strong> ${action.text}</span>`;
-            
-            // Add to container
             const container = document.getElementById("notification-container");
             container.appendChild(div);
-
-            // Animate In (Tiny delay to allow DOM render)
             setTimeout(() => { div.classList.add("show"); }, 100);
-
-            // Remove after 4 seconds
             setTimeout(() => {
                 div.classList.remove("show");
                 setTimeout(() => { div.remove(); }, 500);
             }, 4000);
-
-            // Schedule next one (Random time between 4s and 8s)
             const nextTime = Math.random() * 4000 + 4000;
             setTimeout(showNotification, nextTime);
         }
-
-        // Start the loop
         setTimeout(showNotification, 2000);
 
-        // ---------------------------------------------
         // MODAL LOGIC
-        // ---------------------------------------------
         const policies = {
             terms: { title: "Terms & Conditions", body: `<h3>1. Eligibility</h3><p>Participation is limited to users 18+. One user = one account.</p><h3>2. Match Participation</h3><p>Join promptly using correct details. Admin decisions are final.</p>` },
             refund: { title: "Refund & Cancellation Policy", body: `<h3>1. Eligibility</h3><p>Refunds available for: Match Cancellation, Platform Errors, Late Joining (Contact Support).</p><h3>2. Non-Refundable</h3><p>No refund for Cheating/Bans or Third-Party Server issues.</p>` },
