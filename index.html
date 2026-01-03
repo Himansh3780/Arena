@@ -7,6 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/8074/8074800.png" type="image/png">
+    
+    <script src="admin.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -18,27 +21,25 @@
         }
     </script>
     <style>
-        /* --- MAIN SITE STYLES --- */
+        /* MAIN STYLES */
         body { background-color: #050b14; color: white; background-image: radial-gradient(circle at 50% 0%, #1e1b4b 0%, transparent 50%); overflow-x: hidden; }
         .glass { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); }
         .neon-text { text-shadow: 0 0 10px rgba(99, 102, 241, 0.5); }
         .card-hover:hover { transform: translateY(-5px); border-color: rgba(99, 102, 241, 0.5); }
         .popular-card { border: 1px solid rgba(234, 179, 8, 0.5); box-shadow: 0 0 20px rgba(234, 179, 8, 0.1); }
-        
-        /* Seat Full Style */
         .seat-full-btn { background-color: #334155 !important; color: #94a3b8 !important; cursor: not-allowed !important; pointer-events: none; }
-
-        /* Floating WhatsApp */
         .float-wa { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999; z-index: 100; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
         .float-wa:hover { transform: scale(1.1); box-shadow: 0 0 15px #25d366; }
-
-        /* Notification Popup */
         #notification-container { position: fixed; bottom: 20px; left: 20px; z-index: 99; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
         .live-toast { background: rgba(15, 23, 42, 0.95); border-left: 4px solid #4ade80; color: white; padding: 12px 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-family: 'Inter', sans-serif; font-size: 13px; min-width: 250px; transform: translateX(-150%); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 10px; }
         .live-toast.show { transform: translateX(0); }
-        .toast-icon { font-size: 18px; }
+        
+        /* Maintenance Overlay */
+        #maintenance-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #020617; z-index: 99999; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        
+        /* Notice Bar */
+        #top-notice-bar { display: none; background: #dc2626; color: white; text-align: center; padding: 8px; font-weight: bold; font-size: 13px; width: 100%; animation: fadeIn 1s; }
 
-        /* --- FOOTER & MODAL --- */
         .site-footer { background-color: rgba(5, 11, 20, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; padding: 50px 0 20px; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; margin-top: 60px; }
         .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         .footer-col { flex: 1; min-width: 220px; margin-bottom: 25px; }
@@ -61,9 +62,16 @@
         .accept-btn:hover { background-color: #1d4ed8; }
     </style>
 </head>
-<body class="min-h-screen font-body flex flex-col items-center justify-center pt-8 pb-4">
+<body class="min-h-screen font-body flex flex-col items-center justify-center pt-0 pb-4">
 
-    <div class="text-center mb-8 px-4">
+    <div id="maintenance-screen">
+        <h1 class="text-4xl font-bold text-red-500 mb-2">🚧 UNDER MAINTENANCE</h1>
+        <p class="text-gray-400">We are upgrading our servers.<br>Please come back in 30 minutes.</p>
+    </div>
+
+    <div id="top-notice-bar"></div>
+
+    <div class="text-center mb-8 px-4 mt-8">
         <h1 class="text-5xl font-bold font-heading mb-2 uppercase tracking-tight">TechCrush <span class="text-indigo-500 neon-text">Gaming</span></h1>
         <p class="text-gray-400">Official Tournament Platform</p>
         <div id="global-timer" class="text-2xl font-bold text-yellow-400 mt-2">Checking Time...</div>
@@ -74,7 +82,7 @@
                 <span class="tracking-wider uppercase text-lg">Claim Winnings</span>
             </a>
         </div>
-        </div>
+    </div>
 
     <div class="w-full max-w-6xl mb-10 px-4">
         <div class="grid md:grid-cols-3 gap-4 text-center">
@@ -107,7 +115,7 @@
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Entry</div><div class="text-xl font-bold text-green-400">₹500</div></div>
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Winner</div><div class="text-xl font-bold text-yellow-400">₹1500</div></div>
             </div>
-            <a id="btn-3" href="https://rzp.io/rzp/QyevlZY2" class="block w-full bg-indigo-600 hover:bg-indigo-500 text-white text-center font-bold py-3 rounded-xl transition-colors">JOIN ₹500</a>
+            <a id="btn-3" href="#" class="block w-full bg-indigo-600 hover:bg-indigo-500 text-white text-center font-bold py-3 rounded-xl transition-colors">LOADING...</a>
         </div>
 
         <div class="glass rounded-2xl p-6 relative overflow-hidden transition-all duration-300 card-hover popular-card flex flex-col transform md:-translate-y-2">
@@ -120,7 +128,7 @@
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Entry</div><div class="text-xl font-bold text-green-400">₹200</div></div>
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Winner</div><div class="text-xl font-bold text-yellow-400">₹600</div></div>
             </div>
-            <a id="btn-2" href="https://rzp.io/rzp/1YGvo8Jz" class="block w-full bg-yellow-600 hover:bg-yellow-500 text-white text-center font-bold py-3 rounded-xl transition-colors shadow-lg shadow-yellow-500/20">JOIN ₹200</a>
+            <a id="btn-2" href="#" class="block w-full bg-yellow-600 hover:bg-yellow-500 text-white text-center font-bold py-3 rounded-xl transition-colors shadow-lg shadow-yellow-500/20">LOADING...</a>
         </div>
 
         <div class="glass rounded-2xl p-6 relative overflow-hidden transition-all duration-300 card-hover border border-white/5 flex flex-col">
@@ -132,7 +140,7 @@
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Entry</div><div class="text-xl font-bold text-green-400">₹100</div></div>
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Winner</div><div class="text-xl font-bold text-yellow-400">₹300</div></div>
             </div>
-            <a id="btn-1" href="https://rzp.io/rzp/adlUzxS" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center font-bold py-3 rounded-xl transition-colors">JOIN ₹100</a>
+            <a id="btn-1" href="#" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center font-bold py-3 rounded-xl transition-colors">LOADING...</a>
         </div>
 
     </div>
@@ -155,7 +163,7 @@
         </div>
     </div>
 
-    <a href="https://wa.me/919294931405" target="_blank" class="float-wa">
+    <a id="wa-link" href="#" target="_blank" class="float-wa">
         <svg width="35" height="35" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
     </a>
 
@@ -179,7 +187,7 @@
             </div>
             <div class="footer-col">
                 <div class="footer-heading">Support</div>
-                <p><strong>WhatsApp:</strong> 9294931405</p>
+                <p><strong>WhatsApp:</strong> <span id="wa-display">...</span></p>
                 <p><strong>Email:</strong> support@techcrush.in</p>
                 <p><strong>Hours:</strong> 10:00 AM – 8:00 PM (IST)</p>
             </div>
@@ -203,8 +211,42 @@
     </div>
 
     <script>
-        /* ADMIN CONTROL */
-        const SEAT_STATUS = { silver: "OPEN", gold: "OPEN", diamond: "OPEN" };
+        function initializeSite() {
+            // Check if Admin Settings exist
+            if (typeof window.ADMIN_SETTINGS === 'undefined') {
+                console.error("⚠️ admin.js not loaded! Using defaults.");
+                window.ADMIN_SETTINGS = {
+                    maintenance_mode: false,
+                    top_notice: "",
+                    whatsapp_number: "910000000000",
+                    silver: { status: "OPEN", link: "#" },
+                    gold: { status: "OPEN", link: "#" },
+                    diamond: { status: "OPEN", link: "#" }
+                };
+            }
+            
+            // 1. CHECK MAINTENANCE MODE
+            if (window.ADMIN_SETTINGS.maintenance_mode === true) {
+                document.getElementById('maintenance-screen').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                return; // Stop loading rest of site
+            }
+
+            // 2. CHECK NOTICE BAR
+            if (window.ADMIN_SETTINGS.top_notice && window.ADMIN_SETTINGS.top_notice !== "") {
+                const noticeBar = document.getElementById('top-notice-bar');
+                noticeBar.innerText = window.ADMIN_SETTINGS.top_notice;
+                noticeBar.style.display = 'block';
+            }
+
+            // 3. UPDATE WHATSAPP
+            const waNum = window.ADMIN_SETTINGS.whatsapp_number;
+            document.getElementById('wa-link').href = "https://wa.me/" + waNum;
+            document.getElementById('wa-display').innerText = waNum;
+
+            // 4. UPDATE CARDS (Existing Logic)
+            updateAllCards();
+        }
 
         function updateAllCards() {
             const now = new Date();
@@ -228,21 +270,29 @@
             }
 
             function updateCard(badgeId, subId, btnId, slots, statusKey) {
-                let nextMatch = null;
-                let badgeText = "CLOSED";
-                let subText = "Next: Tomorrow";
-                let badgeColor = "bg-red-600"; 
+                const settings = window.ADMIN_SETTINGS[statusKey]; // READ FROM ADMIN FILE
                 const btn = document.getElementById(btnId);
                 const badge = document.getElementById(badgeId);
                 const sub = document.getElementById(subId);
 
-                if (SEAT_STATUS[statusKey] === "FULL") {
+                let nextMatch = null;
+                let badgeText = "CLOSED";
+                let subText = "Next: Tomorrow";
+                let badgeColor = "bg-red-600"; 
+                
+                // CHECK ADMIN STATUS (FULL or OPEN)
+                if (settings.status === "FULL") {
                     if(badge) { badge.innerText = "FULL"; badge.className = "absolute top-0 right-0 text-xs font-bold px-3 py-1 rounded-bl-lg bg-red-600"; }
                     if(sub) sub.innerText = "Seats Filled";
-                    if(btn) { btn.innerText = "SEATS FULL"; btn.className = "block w-full text-white text-center font-bold py-3 rounded-xl seat-full-btn"; btn.href = "#"; }
+                    if(btn) { 
+                        btn.innerText = "SEATS FULL"; 
+                        btn.className = "block w-full text-white text-center font-bold py-3 rounded-xl seat-full-btn"; 
+                        btn.href = "#"; 
+                    }
                     return; 
                 }
 
+                // IF OPEN, SHOW TIMINGS
                 for (let i = 0; i < slots.length; i++) {
                     if (slots[i] > currentHour) { nextMatch = slots[i]; break; }
                 }
@@ -258,13 +308,22 @@
 
                 if(badge) { badge.innerText = badgeText; badge.className = "absolute top-0 right-0 text-xs font-bold px-3 py-1 rounded-bl-lg " + badgeColor; }
                 if(sub) sub.innerText = subText;
+                
+                // APPLY PAYMENT LINK
+                if(btn) {
+                    btn.innerText = "JOIN ₹" + (statusKey === 'silver' ? '100' : statusKey === 'gold' ? '200' : '500');
+                    btn.className = "block w-full " + (statusKey === 'silver' ? 'bg-blue-600 hover:bg-blue-500' : statusKey === 'gold' ? 'bg-yellow-600 hover:bg-yellow-500' : 'bg-indigo-600 hover:bg-indigo-500') + " text-white text-center font-bold py-3 rounded-xl transition-colors";
+                    btn.href = settings.link;
+                }
             }
 
             updateCard('badge-1', 'sub-1', 'btn-1', schedule100, 'silver');
             updateCard('badge-2', 'sub-2', 'btn-2', schedule200, 'gold');
             updateCard('badge-3', 'sub-3', 'btn-3', schedule500, 'diamond');
         }
-        updateAllCards();
+        
+        // Wait for admin.js to load, then update
+        window.onload = initializeSite;
 
         // ---------------------------------------------
         // LIVE NOTIFICATION LOGIC (POPUPS)
