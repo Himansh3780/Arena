@@ -11,7 +11,7 @@ window.ADMIN_SETTINGS = {
 
     // 📢 TOP ANNOUNCEMENT BAR
     // Leave empty "" to hide. Write text to show a red alert bar.
-    top_notice: "⚠️ Special Weekend Event: Diamond Pot Prize ₹2000 today!",
+    top_notice: "⚠️ ",
 
     // 📞 CONTACT INFO
     whatsapp_number: "919294931405", // Format: 919999999999 (No + symbol)
