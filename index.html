@@ -12,6 +12,7 @@
             theme: {
                 extend: {
                     fontFamily: { heading: ['Rajdhani', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+                    animation: { 'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite' }
                 }
             }
         }
@@ -66,7 +67,14 @@
         <h1 class="text-5xl font-bold font-heading mb-2 uppercase tracking-tight">TechCrush <span class="text-indigo-500 neon-text">Gaming</span></h1>
         <p class="text-gray-400">Official Tournament Platform</p>
         <div id="global-timer" class="text-2xl font-bold text-yellow-400 mt-2">Checking Time...</div>
-    </div>
+        
+        <div class="mt-6">
+            <a href="claim.html" class="relative inline-flex items-center justify-center gap-2 px-8 py-3 font-heading font-bold text-black transition-all duration-300 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full hover:scale-105 hover:shadow-[0_0_20px_rgba(234,179,8,0.5)] focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-900 animate-pulse-slow">
+                <span class="text-xl">🏆</span>
+                <span class="tracking-wider uppercase text-lg">Claim Winnings</span>
+            </a>
+        </div>
+        </div>
 
     <div class="w-full max-w-6xl mb-10 px-4">
         <div class="grid md:grid-cols-3 gap-4 text-center">
@@ -203,7 +211,7 @@
             const currentHour = now.getHours(); 
             const schedule100 = [14, 18]; 
             const schedule200 = [16, 20]; 
-            const schedule500 = [22];     
+            const schedule500 = [22];      
 
             // Top Timer
             const allSlots = [14, 16, 18, 20, 22];
