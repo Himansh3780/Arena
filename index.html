@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/8074/8074800.png" type="image/png">
     
-    <script src="admin.js"></script>
+    <script src="admin.js?v=3"></script>
 
     <script>
         tailwind.config = {
@@ -30,15 +30,31 @@
         .seat-full-btn { background-color: #334155 !important; color: #94a3b8 !important; cursor: not-allowed !important; pointer-events: none; }
         .float-wa { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999; z-index: 100; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
         .float-wa:hover { transform: scale(1.1); box-shadow: 0 0 15px #25d366; }
+        
+        /* NOTIFICATION POPUP (Bottom Left) */
         #notification-container { position: fixed; bottom: 20px; left: 20px; z-index: 99; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
         .live-toast { background: rgba(15, 23, 42, 0.95); border-left: 4px solid #4ade80; color: white; padding: 12px 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-family: 'Inter', sans-serif; font-size: 13px; min-width: 250px; transform: translateX(-150%); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 10px; }
         .live-toast.show { transform: translateX(0); }
         
-        /* Maintenance Overlay */
+        /* MAINTENANCE SCREEN */
         #maintenance-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #020617; z-index: 99999; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         
-        /* Notice Bar */
-        #top-notice-bar { display: none; background: #dc2626; color: white; text-align: center; padding: 8px; font-weight: bold; font-size: 13px; width: 100%; animation: fadeIn 1s; }
+        /* 🏆 PREMIUM GOLD ANNOUNCEMENT BAR */
+        #top-notice-bar { 
+            display: none; 
+            background: linear-gradient(90deg, #facc15 0%, #eab308 100%); /* Gold Gradient */
+            color: #020617; /* Dark text for readability */
+            text-align: center; 
+            padding: 10px; 
+            font-weight: 800; 
+            font-size: 14px; 
+            width: 100%; 
+            animation: fadeIn 1s;
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);
+            border-bottom: 1px solid #ca8a04;
+        }
 
         .site-footer { background-color: rgba(5, 11, 20, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; padding: 50px 0 20px; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; margin-top: 60px; }
         .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
@@ -229,7 +245,7 @@
             if (window.ADMIN_SETTINGS.maintenance_mode === true) {
                 document.getElementById('maintenance-screen').style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-                return; // Stop loading rest of site
+                return; 
             }
 
             // 2. CHECK NOTICE BAR
@@ -270,7 +286,7 @@
             }
 
             function updateCard(badgeId, subId, btnId, slots, statusKey) {
-                const settings = window.ADMIN_SETTINGS[statusKey]; // READ FROM ADMIN FILE
+                const settings = window.ADMIN_SETTINGS[statusKey]; 
                 const btn = document.getElementById(btnId);
                 const badge = document.getElementById(badgeId);
                 const sub = document.getElementById(subId);
