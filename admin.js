@@ -18,7 +18,7 @@ window.ADMIN_SETTINGS = {
 
     // --- 1. SILVER POT (₹100) ---
     silver: {
-        status: "OPEN",                  // Options: "OPEN" or "FULL"
+        status: "FULL",                  // Options: "OPEN" or "FULL"
         link: "https://rzp.io/rzp/adlUzxS"  
     },
 
