@@ -10,8 +10,8 @@ window.ADMIN_SETTINGS = {
     maintenance_mode: false, 
 
     // 📢 TOP ANNOUNCEMENT BAR
-    // Leave empty "" to hide. Write text to show a red alert bar.
-    top_notice: "⚠️ ",
+    // Leave empty "" to hide. Write text to show a green alert bar.
+    top_notice: "  ",
 
     // 📞 CONTACT INFO
     whatsapp_number: "919294931405", // Format: 919999999999 (No + symbol)
