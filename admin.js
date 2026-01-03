@@ -1,24 +1,25 @@
 // ==========================================
-// 🛡️ TECHCRUSH CONTROL CENTER v2
-// Edit this file to control your entire website
+// 🛡️ TECHCRUSH CONTROL CENTER
+// Edit this file to control your website
 // ==========================================
 
 window.ADMIN_SETTINGS = {
 
-    // 🔴 EMERGENCY SWITCH
-    // Set to true to close the WHOLE website with a "Maintenance" message.
+    // 🔴 MAINTENANCE MODE
+    // Set to true to close the site. Set to false to open it.
     maintenance_mode: false, 
 
     // 📢 TOP ANNOUNCEMENT BAR
-    // Leave empty "" to hide. Write text to show a green alert bar.
-    top_notice: "  ",
+    // Write your message here. It will appear in a GOLD bar at the top.
+    // Example: "🎉 Special Weekend Offer: Win Double Prizes!"
+    top_notice: "🎉 Registration Open! Join the Gold Pot & Win Big!",
 
     // 📞 CONTACT INFO
-    whatsapp_number: "919294931405", // Format: 919999999999 (No + symbol)
+    whatsapp_number: "919294931405", // (No + symbol)
 
     // --- 1. SILVER POT (₹100) ---
     silver: {
-        status: "FULL",                  // Options: "OPEN" or "FULL"
+        status: "OPEN",                  // Options: "OPEN" or "FULL"
         link: "https://rzp.io/rzp/adlUzxS"  
     },
 
