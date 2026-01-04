@@ -39,11 +39,11 @@
         /* MAINTENANCE SCREEN */
         #maintenance-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #020617; z-index: 99999; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         
-        /* 🏆 PREMIUM GOLD ANNOUNCEMENT BAR */
+        /* 🏆 ANNOUNCEMENT BAR */
         #top-notice-bar { 
             display: none; 
-            background: linear-gradient(90deg, #facc15 0%, #eab308 100%); /* Gold Gradient */
-            color: #020617; /* Dark text for readability */
+            background: linear-gradient(90deg, #facc15 0%, #eab308 100%); 
+            color: #020617; 
             text-align: center; 
             padding: 10px; 
             font-weight: 800; 
@@ -56,6 +56,11 @@
             border-bottom: 1px solid #ca8a04;
         }
 
+        /* LOGIN STYLES */
+        .auth-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); padding: 10px; border-radius: 8px; color: white; margin-bottom: 10px; }
+        .auth-input:focus { outline: none; border-color: #6366f1; }
+
+        /* FOOTER & MODAL STYLES */
         .site-footer { background-color: rgba(5, 11, 20, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; padding: 50px 0 20px; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; margin-top: 60px; }
         .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         .footer-col { flex: 1; min-width: 220px; margin-bottom: 25px; }
@@ -78,7 +83,7 @@
         .accept-btn:hover { background-color: #1d4ed8; }
     </style>
 </head>
-<body class="min-h-screen font-body flex flex-col items-center justify-center pt-0 pb-4">
+<body class="min-h-screen font-body flex flex-col items-center justify-start pt-0 pb-4">
 
     <div id="maintenance-screen">
         <h1 class="text-4xl font-bold text-red-500 mb-2">🚧 UNDER MAINTENANCE</h1>
@@ -87,7 +92,55 @@
 
     <div id="top-notice-bar"></div>
 
-    <div class="text-center mb-8 px-4 mt-8">
+    <div id="auth-main-wrapper" class="w-full max-w-md px-4 mt-6">
+        
+        <div id="auth-container" class="glass rounded-xl p-6 border border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+            
+            <div id="login-section">
+                <h3 class="text-xl font-heading font-bold text-center mb-4 text-indigo-300">PLAYER LOGIN</h3>
+                <input type="email" id="login-email" placeholder="Email Address" class="auth-input">
+                <input type="password" id="login-password" placeholder="Password" class="auth-input">
+                <button id="btn-login" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-lg transition-colors mb-3">
+                    LOGIN
+                </button>
+                <p class="text-center text-xs text-gray-400">
+                    Don't have an account? <a href="#" id="link-to-signup" class="text-yellow-400 hover:underline">Register Now</a>
+                </p>
+            </div>
+
+            <div id="signup-section" style="display:none;">
+                <h3 class="text-xl font-heading font-bold text-center mb-4 text-yellow-400">CREATE ACCOUNT</h3>
+                <input type="text" id="signup-username" placeholder="Player Name (e.g. King_07)" class="auth-input">
+                <input type="email" id="signup-email" placeholder="Email Address" class="auth-input">
+                <input type="password" id="signup-password" placeholder="Create Password" class="auth-input">
+                <button id="btn-signup" class="w-full bg-yellow-600 hover:bg-yellow-500 text-white font-bold py-2 rounded-lg transition-colors mb-3">
+                    REGISTER
+                </button>
+                <p class="text-center text-xs text-gray-400">
+                    Already have an account? <a href="#" id="link-to-login" class="text-indigo-400 hover:underline">Login Here</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="user-dashboard" class="glass rounded-xl p-6 border border-green-500/30" style="display:none;">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h2 class="text-2xl font-heading font-bold text-white">Welcome, <span id="display-username" class="text-green-400">Player</span>!</h2>
+                    <p class="text-xs text-gray-400" id="display-email">email@example.com</p>
+                </div>
+                <button id="btn-logout" class="bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs px-3 py-1 rounded border border-red-600 transition-colors">Logout</button>
+            </div>
+            <hr class="border-white/10 mb-4">
+            <div class="bg-black/30 p-3 rounded-lg mb-4">
+                <h4 class="text-sm font-bold text-indigo-300 mb-2">Update Profile</h4>
+                <div class="flex gap-2">
+                    <input type="text" id="new-username" placeholder="New Name" class="auth-input mb-0 text-sm">
+                    <button id="btn-update-name" class="bg-indigo-600 px-3 rounded text-sm font-bold">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mb-8 px-4 mt-6">
         <h1 class="text-5xl font-bold font-heading mb-2 uppercase tracking-tight">TechCrush <span class="text-indigo-500 neon-text">Gaming</span></h1>
         <p class="text-gray-400">Official Tournament Platform</p>
         <div id="global-timer" class="text-2xl font-bold text-yellow-400 mt-2">Checking Time...</div>
@@ -121,7 +174,6 @@
     </div>
 
     <div class="grid md:grid-cols-3 gap-6 w-full max-w-6xl px-4">
-
         <div class="glass rounded-2xl p-6 relative overflow-hidden transition-all duration-300 card-hover border border-white/5 flex flex-col">
             <div id="badge-3" class="absolute top-0 right-0 bg-blue-600 text-xs font-bold px-3 py-1 rounded-bl-lg">Wait...</div>
             <h2 class="text-3xl font-heading font-bold mb-1 text-blue-300">Diamond Pot</h2>
@@ -158,7 +210,6 @@
             </div>
             <a id="btn-1" href="#" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center font-bold py-3 rounded-xl transition-colors">LOADING...</a>
         </div>
-
     </div>
 
     <div class="w-full max-w-4xl mt-12 mb-8 px-4">
@@ -226,177 +277,193 @@
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } 
+        from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // CONFIG
+        const firebaseConfig = {
+            apiKey: "AIzaSyCBeLkcCws6IRTIUztKMDCQztK8-os1pZM",
+            authDomain: "ludo-7753c.firebaseapp.com",
+            projectId: "ludo-7753c",
+            storageBucket: "ludo-7753c.firebasestorage.app",
+            messagingSenderId: "780949213750",
+            appId: "1:780949213750:web:c54afff4efd44948163e97",
+            measurementId: "G-SCSFRTD857"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // UI ELEMENTS
+        const authContainer = document.getElementById('auth-container');
+        const userDashboard = document.getElementById('user-dashboard');
+        const loginSection = document.getElementById('login-section');
+        const signupSection = document.getElementById('signup-section');
+
+        // ACTIONS
+        document.getElementById('link-to-signup').addEventListener('click', (e) => { e.preventDefault(); loginSection.style.display='none'; signupSection.style.display='block'; });
+        document.getElementById('link-to-login').addEventListener('click', (e) => { e.preventDefault(); signupSection.style.display='none'; loginSection.style.display='block'; });
+
+        // REGISTER
+        document.getElementById('btn-signup').addEventListener('click', async () => {
+            const e = document.getElementById('signup-email').value;
+            const p = document.getElementById('signup-password').value;
+            const u = document.getElementById('signup-username').value;
+            if(!e || !p || !u) return alert("Fill all fields");
+            try {
+                const cred = await createUserWithEmailAndPassword(auth, e, p);
+                await updateProfile(cred.user, { displayName: u });
+                alert("Welcome " + u + "!");
+            } catch(err) { alert(err.message); }
+        });
+
+        // LOGIN
+        document.getElementById('btn-login').addEventListener('click', async () => {
+            const e = document.getElementById('login-email').value;
+            const p = document.getElementById('login-password').value;
+            if(!e || !p) return alert("Fill all fields");
+            try { await signInWithEmailAndPassword(auth, e, p); } catch(err) { alert(err.message); }
+        });
+
+        // LOGOUT
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            signOut(auth).then(() => window.location.reload());
+        });
+
+        // UPDATE NAME
+        document.getElementById('btn-update-name').addEventListener('click', async () => {
+            const n = document.getElementById('new-username').value;
+            if(auth.currentUser && n) {
+                await updateProfile(auth.currentUser, { displayName: n });
+                document.getElementById('display-username').innerText = n;
+                alert("Name updated!");
+            }
+        });
+
+        // STATE LISTENER
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+                if(authContainer) authContainer.style.display = 'none';
+                if(userDashboard) userDashboard.style.display = 'block';
+                document.getElementById('display-username').innerText = user.displayName || "User";
+                document.getElementById('display-email').innerText = user.email;
+            } else {
+                if(authContainer) authContainer.style.display = 'block';
+                if(userDashboard) userDashboard.style.display = 'none';
+            }
+        });
+    </script>
+
     <script>
         function initializeSite() {
-            // Check if Admin Settings exist
             if (typeof window.ADMIN_SETTINGS === 'undefined') {
-                console.error("⚠️ admin.js not loaded! Using defaults.");
-                window.ADMIN_SETTINGS = {
-                    maintenance_mode: false,
-                    top_notice: "",
-                    whatsapp_number: "910000000000",
-                    silver: { status: "OPEN", link: "#" },
-                    gold: { status: "OPEN", link: "#" },
-                    diamond: { status: "OPEN", link: "#" }
-                };
+                window.ADMIN_SETTINGS = { maintenance_mode: false, top_notice: "", whatsapp_number: "919999999999", silver: { status: "OPEN", link: "#" }, gold: { status: "OPEN", link: "#" }, diamond: { status: "OPEN", link: "#" } };
             }
             
-            // 1. CHECK MAINTENANCE MODE
-            if (window.ADMIN_SETTINGS.maintenance_mode === true) {
+            if (window.ADMIN_SETTINGS.maintenance_mode) {
                 document.getElementById('maintenance-screen').style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-                return; 
+                return;
             }
 
-            // 2. CHECK NOTICE BAR
-            if (window.ADMIN_SETTINGS.top_notice && window.ADMIN_SETTINGS.top_notice !== "") {
-                const noticeBar = document.getElementById('top-notice-bar');
-                noticeBar.innerText = window.ADMIN_SETTINGS.top_notice;
-                noticeBar.style.display = 'block';
+            if (window.ADMIN_SETTINGS.top_notice) {
+                const nb = document.getElementById('top-notice-bar');
+                nb.innerText = window.ADMIN_SETTINGS.top_notice;
+                nb.style.display = 'block';
             }
 
-            // 3. UPDATE WHATSAPP
-            const waNum = window.ADMIN_SETTINGS.whatsapp_number;
-            document.getElementById('wa-link').href = "https://wa.me/" + waNum;
-            document.getElementById('wa-display').innerText = waNum;
+            const wn = window.ADMIN_SETTINGS.whatsapp_number;
+            document.getElementById('wa-link').href = "https://wa.me/" + wn;
+            document.getElementById('wa-display').innerText = wn;
 
-            // 4. UPDATE CARDS (Existing Logic)
             updateAllCards();
         }
 
         function updateAllCards() {
             const now = new Date();
-            const currentHour = now.getHours(); 
-            const schedule100 = [14, 18]; 
-            const schedule200 = [16, 20]; 
-            const schedule500 = [22];      
-
-            // Top Timer
+            const ch = now.getHours(); 
+            const schedule = { silver: [14, 18], gold: [16, 20], diamond: [22] };
+            
+            // Global Timer
             const allSlots = [14, 16, 18, 20, 22];
-            let globalNext = null;
-            for(let i=0; i<allSlots.length; i++) {
-                if(allSlots[i] > currentHour) { globalNext = allSlots[i]; break; }
-            }
-            if(globalNext) {
-                let p = globalNext >= 12 ? "PM" : "AM";
-                let h = globalNext > 12 ? globalNext - 12 : globalNext;
+            let next = allSlots.find(s => s > ch);
+            if(next) {
+                let p = next >= 12 ? "PM" : "AM";
+                let h = next > 12 ? next - 12 : next;
                 document.getElementById('global-timer').innerText = h + ":00 " + p;
             } else {
                 document.getElementById('global-timer').innerText = "Tomorrow 2:00 PM";
             }
 
-            function updateCard(badgeId, subId, btnId, slots, statusKey) {
-                const settings = window.ADMIN_SETTINGS[statusKey]; 
-                const btn = document.getElementById(btnId);
-                const badge = document.getElementById(badgeId);
-                const sub = document.getElementById(subId);
+            function setCard(bid, sid, btnid, slots, key) {
+                const st = window.ADMIN_SETTINGS[key];
+                const b = document.getElementById(bid);
+                const s = document.getElementById(sid);
+                const btn = document.getElementById(btnid);
 
-                let nextMatch = null;
-                let badgeText = "CLOSED";
-                let subText = "Next: Tomorrow";
-                let badgeColor = "bg-red-600"; 
+                if(st.status === "FULL") {
+                    b.innerText = "FULL"; b.className += " bg-red-600";
+                    s.innerText = "Seats Filled";
+                    btn.innerText = "SEATS FULL"; btn.className = "block w-full text-white text-center font-bold py-3 rounded-xl seat-full-btn";
+                    return;
+                }
+
+                let nx = slots.find(sl => sl > ch);
+                if(nx) {
+                    let p = nx >= 12 ? "PM" : "AM";
+                    let h = nx > 12 ? nx - 12 : nx;
+                    b.innerText = "STARTS: " + h + ":00 " + p;
+                    b.className += " bg-green-600";
+                    s.innerText = "Match time: " + h + ":00 " + p;
+                } else {
+                    b.innerText = "CLOSED"; b.className += " bg-red-600";
+                    s.innerText = "Next: Tomorrow";
+                }
                 
-                // CHECK ADMIN STATUS (FULL or OPEN)
-                if (settings.status === "FULL") {
-                    if(badge) { badge.innerText = "FULL"; badge.className = "absolute top-0 right-0 text-xs font-bold px-3 py-1 rounded-bl-lg bg-red-600"; }
-                    if(sub) sub.innerText = "Seats Filled";
-                    if(btn) { 
-                        btn.innerText = "SEATS FULL"; 
-                        btn.className = "block w-full text-white text-center font-bold py-3 rounded-xl seat-full-btn"; 
-                        btn.href = "#"; 
-                    }
-                    return; 
-                }
-
-                // IF OPEN, SHOW TIMINGS
-                for (let i = 0; i < slots.length; i++) {
-                    if (slots[i] > currentHour) { nextMatch = slots[i]; break; }
-                }
-
-                if (nextMatch) {
-                    let period = nextMatch >= 12 ? "PM" : "AM";
-                    let displayHour = nextMatch > 12 ? nextMatch - 12 : nextMatch;
-                    let displayTime = displayHour + ":00 " + period;
-                    badgeText = "STARTS: " + displayTime;
-                    subText = "Match time: " + displayTime;
-                    badgeColor = "bg-green-600"; 
-                }
-
-                if(badge) { badge.innerText = badgeText; badge.className = "absolute top-0 right-0 text-xs font-bold px-3 py-1 rounded-bl-lg " + badgeColor; }
-                if(sub) sub.innerText = subText;
-                
-                // APPLY PAYMENT LINK
-                if(btn) {
-                    btn.innerText = "JOIN ₹" + (statusKey === 'silver' ? '100' : statusKey === 'gold' ? '200' : '500');
-                    btn.className = "block w-full " + (statusKey === 'silver' ? 'bg-blue-600 hover:bg-blue-500' : statusKey === 'gold' ? 'bg-yellow-600 hover:bg-yellow-500' : 'bg-indigo-600 hover:bg-indigo-500') + " text-white text-center font-bold py-3 rounded-xl transition-colors";
-                    btn.href = settings.link;
-                }
+                btn.innerText = "JOIN ₹" + (key==='silver'?100:key==='gold'?200:500);
+                btn.href = st.link;
             }
 
-            updateCard('badge-1', 'sub-1', 'btn-1', schedule100, 'silver');
-            updateCard('badge-2', 'sub-2', 'btn-2', schedule200, 'gold');
-            updateCard('badge-3', 'sub-3', 'btn-3', schedule500, 'diamond');
+            setCard('badge-1', 'sub-1', 'btn-1', schedule.silver, 'silver');
+            setCard('badge-2', 'sub-2', 'btn-2', schedule.gold, 'gold');
+            setCard('badge-3', 'sub-3', 'btn-3', schedule.diamond, 'diamond');
         }
-        
-        // Wait for admin.js to load, then update
+
         window.onload = initializeSite;
 
-        // ---------------------------------------------
-        // LIVE NOTIFICATION LOGIC (POPUPS)
-        // ---------------------------------------------
-        const fakeNames = ["Rahul_K", "Amit99", "Priya_Cool", "Vicky_Don", "Sneha_M", "Rohan_Gamer", "Killer_007", "Ludo_King", "Anjali_S", "Vikram_Boss", "Arjun_P"];
-        const fakeActions = [
-            { text: "won ₹300 in Silver Pot", icon: "🔥" },
-            { text: "joined Gold Pot", icon: "🚀" },
-            { text: "withdrew ₹1500", icon: "💸" },
-            { text: "won ₹600 in Gold Pot", icon: "🏆" }
-        ];
-
-        function showNotification() {
-            const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
-            const action = fakeActions[Math.floor(Math.random() * fakeActions.length)];
-            const div = document.createElement("div");
-            div.className = "live-toast";
-            div.innerHTML = `<span class="toast-icon">${action.icon}</span> <span><strong>${name}</strong> ${action.text}</span>`;
-            const container = document.getElementById("notification-container");
-            container.appendChild(div);
-            setTimeout(() => { div.classList.add("show"); }, 100);
-            setTimeout(() => {
-                div.classList.remove("show");
-                setTimeout(() => { div.remove(); }, 500);
-            }, 4000);
-            const nextTime = Math.random() * 4000 + 4000;
-            setTimeout(showNotification, nextTime);
+        // Notifications
+        const names = ["Rahul_K", "Amit99", "Priya_Cool", "Vicky_Don", "Sneha_M", "Rohan_Gamer", "Killer_007", "Ludo_King", "Anjali_S", "Vikram_Boss", "Arjun_P"];
+        const acts = [{t:"won ₹300",i:"🔥"},{t:"joined Gold",i:"🚀"},{t:"withdrew ₹1500",i:"💸"},{t:"won ₹600",i:"🏆"}];
+        function notif() {
+            const n = names[Math.floor(Math.random()*names.length)];
+            const a = acts[Math.floor(Math.random()*acts.length)];
+            const d = document.createElement("div");
+            d.className = "live-toast";
+            d.innerHTML = `<span class="toast-icon">${a.i}</span> <span><strong>${n}</strong> ${a.t}</span>`;
+            document.getElementById("notification-container").appendChild(d);
+            setTimeout(()=>d.classList.add("show"),100);
+            setTimeout(()=>{ d.classList.remove("show"); setTimeout(()=>d.remove(),500); }, 4000);
+            setTimeout(notif, Math.random()*4000+4000);
         }
-        setTimeout(showNotification, 2000);
+        setTimeout(notif, 2000);
 
-        // MODAL LOGIC
-        const policies = {
-            terms: { title: "Terms & Conditions", body: `<h3>1. Eligibility</h3><p>Participation is limited to users 18+. One user = one account.</p><h3>2. Match Participation</h3><p>Join promptly using correct details. Admin decisions are final.</p>` },
-            refund: { title: "Refund & Cancellation Policy", body: `<h3>1. Eligibility</h3><p>Refunds available for: Match Cancellation, Platform Errors, Late Joining (Contact Support).</p><h3>2. Non-Refundable</h3><p>No refund for Cheating/Bans or Third-Party Server issues.</p>` },
-            privacy: { title: "Privacy Policy", body: `<h3>1. Data Usage</h3><p>We collect Name, WhatsApp, Game ID only for coordination. We DO NOT share data.</p>` },
-            rules: { title: "Fair Play & Rules", body: `<h3>1. Zero Tolerance</h3><p>No cheating, hacking, or teaming. Violations = Instant Ban.</p>` }
+        // Modals
+        const pol = {
+            terms: { t: "Terms", b: "<h3>1. Eligibility</h3><p>18+ Only.</p>" },
+            refund: { t: "Refunds", b: "<h3>1. Policy</h3><p>Refunds for errors only.</p>" },
+            privacy: { t: "Privacy", b: "<h3>1. Data</h3><p>Data used for gameplay only.</p>" },
+            rules: { t: "Rules", b: "<h3>1. Fair Play</h3><p>No cheating.</p>" }
         };
-
-        function openModal(type) {
-            const modal = document.getElementById('infoModal');
-            const title = document.getElementById('modalTitle');
-            const body = document.getElementById('modalBody');
-            if (policies[type]) {
-                title.innerText = policies[type].title;
-                body.innerHTML = policies[type].body;
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden'; 
+        window.openModal = (t) => {
+            if(pol[t]) {
+                document.getElementById('modalTitle').innerText = pol[t].t;
+                document.getElementById('modalBody').innerHTML = pol[t].b;
+                document.getElementById('infoModal').style.display = 'block';
             }
-        }
-        function closeModal() {
-            document.getElementById('infoModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; 
-        }
-        window.onclick = function(event) {
-            var modal = document.getElementById('infoModal');
-            if (event.target == modal) closeModal();
-        }
+        };
+        window.closeModal = () => document.getElementById('infoModal').style.display = 'none';
     </script>
 </body>
 </html>
