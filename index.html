@@ -87,6 +87,20 @@
 
     <div id="top-notice-bar"></div>
 
+    <div class="absolute top-4 right-4 z-50">
+        <button id="loginBtn" onclick="openAuthModal()" class="bg-blue-600 hover:bg-blue-500 text-white font-heading font-bold px-4 py-2 rounded-lg shadow-lg border border-blue-400/30 transition-all text-sm">
+            LOGIN
+        </button>
+
+        <div id="userProfile" class="hidden flex items-center gap-2 bg-slate-900/90 p-1 pr-3 rounded-full border border-green-500/50">
+            <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center font-bold text-black text-xs" id="userAvatar">ID</div>
+            <div class="text-xs text-left">
+                <div class="font-bold text-green-400" id="userEmail">...</div>
+                <div class="text-[10px] text-red-400 cursor-pointer hover:underline" onclick="logoutUser()">Logout</div>
+            </div>
+        </div>
+    </div>
+
     <div class="text-center mb-8 px-4 mt-8">
         <h1 class="text-5xl font-bold font-heading mb-2 uppercase tracking-tight">TechCrush <span class="text-indigo-500 neon-text">Gaming</span></h1>
         <p class="text-gray-400">Official Tournament Platform</p>
@@ -131,7 +145,7 @@
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Entry</div><div class="text-xl font-bold text-green-400">₹500</div></div>
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Winner</div><div class="text-xl font-bold text-yellow-400">₹1500</div></div>
             </div>
-            <a id="btn-3" href="#" class="block w-full bg-indigo-600 hover:bg-indigo-500 text-white text-center font-bold py-3 rounded-xl transition-colors">LOADING...</a>
+            <a id="btn-3" href="#" onclick="return checkLogin(event, this.href)" class="block w-full bg-indigo-600 hover:bg-indigo-500 text-white text-center font-bold py-3 rounded-xl transition-colors">LOADING...</a>
         </div>
 
         <div class="glass rounded-2xl p-6 relative overflow-hidden transition-all duration-300 card-hover popular-card flex flex-col transform md:-translate-y-2">
@@ -144,7 +158,7 @@
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Entry</div><div class="text-xl font-bold text-green-400">₹200</div></div>
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Winner</div><div class="text-xl font-bold text-yellow-400">₹600</div></div>
             </div>
-            <a id="btn-2" href="#" class="block w-full bg-yellow-600 hover:bg-yellow-500 text-white text-center font-bold py-3 rounded-xl transition-colors shadow-lg shadow-yellow-500/20">LOADING...</a>
+            <a id="btn-2" href="#" onclick="return checkLogin(event, this.href)" class="block w-full bg-yellow-600 hover:bg-yellow-500 text-white text-center font-bold py-3 rounded-xl transition-colors shadow-lg shadow-yellow-500/20">LOADING...</a>
         </div>
 
         <div class="glass rounded-2xl p-6 relative overflow-hidden transition-all duration-300 card-hover border border-white/5 flex flex-col">
@@ -156,7 +170,7 @@
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Entry</div><div class="text-xl font-bold text-green-400">₹100</div></div>
                 <div class="text-center"><div class="text-[10px] text-gray-500 uppercase">Winner</div><div class="text-xl font-bold text-yellow-400">₹300</div></div>
             </div>
-            <a id="btn-1" href="#" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center font-bold py-3 rounded-xl transition-colors">LOADING...</a>
+            <a id="btn-1" href="#" onclick="return checkLogin(event, this.href)" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center font-bold py-3 rounded-xl transition-colors">LOADING...</a>
         </div>
 
     </div>
@@ -212,6 +226,30 @@
             <p>&copy; 2026 TechCrush.in. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 350px;">
+            <div class="modal-header">
+                <h2 id="authTitle">Login</h2>
+                <span class="close-btn" onclick="closeAuthModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="authForm" class="flex flex-col gap-3">
+                    <input type="email" id="authEmail" placeholder="Email" required class="w-full bg-slate-800 border border-slate-600 rounded p-2 text-white focus:border-blue-500 outline-none">
+                    <input type="password" id="authPass" placeholder="Password (6+ chars)" required class="w-full bg-slate-800 border border-slate-600 rounded p-2 text-white focus:border-blue-500 outline-none">
+                    
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 py-2 rounded font-bold text-white mt-2 transition-colors">
+                        <span id="submitBtnText">ENTER</span>
+                    </button>
+                </form>
+                
+                <p class="text-center text-xs text-gray-400 mt-4 cursor-pointer hover:text-white" id="toggleAuthMode">
+                    New? <span class="text-yellow-400 font-bold">Create Account</span>
+                </p>
+                <p id="authError" class="text-red-500 text-center text-xs mt-2 font-bold"></p>
+            </div>
+        </div>
+    </div>
 
     <div id="infoModal" class="modal-overlay">
         <div class="modal-content">
@@ -269,7 +307,7 @@
             const currentHour = now.getHours(); 
             const schedule100 = [14, 18]; 
             const schedule200 = [16, 20]; 
-            const schedule500 = [22];      
+            const schedule500 = [22];       
 
             // Top Timer
             const allSlots = [14, 16, 18, 20, 22];
@@ -397,6 +435,117 @@
             var modal = document.getElementById('infoModal');
             if (event.target == modal) closeModal();
         }
+    </script>
+
+    <script type="module">
+        // Import Firebase from CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // CONFIG (Your Provided Keys)
+        const firebaseConfig = {
+          apiKey: "AIzaSyCBeLkcCws6IRTIUztKMDCQztK8-os1pZM",
+          authDomain: "ludo-7753c.firebaseapp.com",
+          projectId: "ludo-7753c",
+          storageBucket: "ludo-7753c.firebasestorage.app",
+          messagingSenderId: "780949213750",
+          appId: "1:780949213750:web:c54afff4efd44948163e97",
+          measurementId: "G-SCSFRTD857"
+        };
+
+        // Init
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // UI Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const userProfile = document.getElementById('userProfile');
+        const userEmailDisplay = document.getElementById('userEmail');
+        const authModal = document.getElementById('authModal');
+        const authForm = document.getElementById('authForm');
+        const authError = document.getElementById('authError');
+        const toggleAuthMode = document.getElementById('toggleAuthMode');
+        const authTitle = document.getElementById('authTitle');
+        
+        let isLogin = true; 
+
+        // Monitor Auth State
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // LOGGED IN
+                loginBtn.classList.add('hidden');
+                userProfile.classList.remove('hidden');
+                userProfile.classList.add('flex');
+                userEmailDisplay.innerText = user.email.split('@')[0];
+            } else {
+                // LOGGED OUT
+                loginBtn.classList.remove('hidden');
+                userProfile.classList.add('hidden');
+                userProfile.classList.remove('flex');
+            }
+        });
+
+        // Form Submit
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('authEmail').value;
+            const pass = document.getElementById('authPass').value;
+            authError.innerText = "Processing...";
+
+            try {
+                if (isLogin) {
+                    await signInWithEmailAndPassword(auth, email, pass);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, pass);
+                }
+                closeAuthModal();
+                authForm.reset();
+                authError.innerText = "";
+            } catch (error) {
+                let msg = error.message;
+                if(msg.includes('invalid-credential')) msg = "Wrong email or password.";
+                if(msg.includes('email-already-in-use')) msg = "Email already taken.";
+                if(msg.includes('weak-password')) msg = "Password too weak.";
+                authError.innerText = msg;
+            }
+        });
+
+        // Toggle Login/Register
+        toggleAuthMode.addEventListener('click', () => {
+            isLogin = !isLogin;
+            if(isLogin) {
+                authTitle.innerText = "Login";
+                toggleAuthMode.innerHTML = 'New? <span class="text-yellow-400 font-bold">Create Account</span>';
+            } else {
+                authTitle.innerText = "Register";
+                toggleAuthMode.innerHTML = 'Have account? <span class="text-yellow-400 font-bold">Login</span>';
+            }
+        });
+
+        // Global functions exposed to window
+        window.logoutUser = () => {
+            signOut(auth).then(() => alert("Logged Out!"));
+        };
+
+        window.openAuthModal = () => {
+            authModal.style.display = 'block';
+        };
+
+        window.closeAuthModal = () => {
+            authModal.style.display = 'none';
+        };
+
+        // Important: Blocks non-logged in users from clicking Join
+        window.checkLogin = (e, link) => {
+            const user = auth.currentUser;
+            if (!user) {
+                e.preventDefault(); 
+                openAuthModal(); 
+                document.getElementById('authError').innerText = "Please Login to Join!";
+                return false;
+            }
+            return true;
+        };
     </script>
 </body>
 </html>
