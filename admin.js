@@ -25,13 +25,13 @@ window.ADMIN_SETTINGS = {
 
     // --- 2. GOLD POT (₹200) ---
     gold: {
-        status: "OPEN",                  // Options: "OPEN" or "FULL"
+        status: "FULL",                  // Options: "OPEN" or "FULL"
         link: "https://rzp.io/rzp/1YGvo8Jz" 
     },
 
     // --- 3. DIAMOND POT (₹500) ---
     diamond: {
-        status: "OPEN",                  // Options: "OPEN" or "FULL"
+        status: "FULL",                  // Options: "OPEN" or "FULL"
         link: "https://rzp.io/rzp/QyevlZY2" 
     }
 
